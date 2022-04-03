@@ -9,4 +9,4 @@
 ###############################################################################################
 
 thatfurry = Host
-thatguytmaster = Game Master
+thatguytmaster = Host
