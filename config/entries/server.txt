@@ -2,19 +2,19 @@
 #AUTO_PROFILE
 
 ## Server name: This appears at the top of the screen in-game and in the BYOND hub. Uncomment and replace 'tgstation' with the name of your choice.
-# SERVERNAME tgstation
+@SERVERNAME Sierra Station 13
 
 ## Server tagline: This will appear right below the server's title.
-# SERVERTAGLINE A generic TG-based server
+SERVERTAGLINE The future is now, old man.
 
 ## Server SQL name: This is the name used to identify the server to the SQL DB, distinct from SERVERNAME as it must be at most 32 characters.
-# SERVERSQLNAME tgstation
+@SERVERSQLNAME SierraStation13
 
 ## Station name: The name of the station as it is referred to in-game. If commented out, the game will generate a random name instead.
-STATIONNAME Space Station 13
+STATIONNAME Sierra Station 13
 
 ## Put on byond hub: Uncomment this to put your server on the byond hub.
-#HUB
+HUB
 
 ## Defines the ticklimit for subsystem initialization (In percents of a byond tick). Lower makes world start smoother. Higher makes it faster.
 ##This is currently a testing optimized setting. A good value for production would be 98.
@@ -31,7 +31,7 @@ TICKLAG 0.5
 #USEWHITELIST
 
 ## set a hosted by name for unix platforms
-HOSTEDBY Yournamehere
+HOSTEDBY Sierra Team
 
 ## System command that invokes youtube-dl, used by Play Internet Sound.
 ## You can install youtube-dl with
@@ -71,4 +71,4 @@ DISABLE_HIGH_POP_MC_MODE_AMOUNT 60
 ## Disallows roundstart gamemode voting if not null or uncommented
 ## Just input the gamemode lowercase in there, the thing will take a simple string for it
 ## Invalid gamemodes will default extended, have fun.
-#FORCE_GAMEMODE
+FORCE_GAMEMODE dynamic
