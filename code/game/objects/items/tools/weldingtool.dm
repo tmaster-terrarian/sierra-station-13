@@ -14,6 +14,8 @@
 	throwforce = 5
 	hitsound = "swing_hit"
 	usesound = list('sound/items/welder.ogg', 'sound/items/welder2.ogg')
+	drop_sound = 'sound/items/handling/weldingtool_drop.ogg'
+	pickup_sound = 'sound/items/handling/weldingtool_pickup.ogg'
 	var/acti_sound = 'sound/items/welderactivate.ogg'
 	var/deac_sound = 'sound/items/welderdeactivate.ogg'
 	throw_speed = 3
@@ -46,6 +48,8 @@
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	update_icon()
+	if(can_off_process)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/weldingtool/ComponentInitialize()
 	. = ..()

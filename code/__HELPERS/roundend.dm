@@ -244,12 +244,12 @@
 	CHECK_TICK
 
 	// Add AntagHUD to everyone, see who was really evil the whole time!
-	for(var/datum/atom_hud/antag/H in GLOB.huds)
-		for(var/m in GLOB.player_list)
-			var/mob/M = m
-			H.add_hud_to(M)
-
-	CHECK_TICK
+	if(CONFIG_GET(flag/reveal_everything))
+		for(var/datum/atom_hud/antag/H in GLOB.huds)
+			for(var/m in GLOB.player_list)
+				var/mob/M = m
+				H.add_hud_to(M)
+		CHECK_TICK
 
 	//Set news report and mode result
 	mode.set_round_result()
@@ -271,9 +271,9 @@
 	CHECK_TICK
 
 	// handle_hearts()
-	set_observer_default_invisibility(0, "<span class='warning'>The round is over! You are now visible to the living.</span>")
-
-	CHECK_TICK
+	if(CONFIG_GET(flag/reveal_everything))
+		set_observer_default_invisibility(0, "<span class='warning'>The round is over! You are now visible to the living.</span>")
+		CHECK_TICK
 
 	//These need update to actually reflect the real antagonists
 	//Print a list of antagonists to the server log
@@ -590,8 +590,8 @@
 	var/list/all_teams = list()
 	var/list/all_antagonists = list()
 
-	// for(var/datum/team/A in GLOB.antagonist_teams)
-	// 	all_teams |= A
+	for(var/datum/team/A in GLOB.antagonist_teams)
+		all_teams |= A
 
 	for(var/datum/antagonist/A in GLOB.antagonists)
 		if(!A.owner)
@@ -624,6 +624,10 @@
 			currrent_category = A.roundend_category
 			previous_category = A
 		result += A.roundend_report()
+//ambition start
+		for(var/count in 1 to LAZYLEN(A.owner.ambitions))
+			result += "<br><B>Ambition #[count]</B>: [A.owner.ambitions[count]]"
+//ambition end
 		result += "<br><br>"
 		CHECK_TICK
 

@@ -85,7 +85,6 @@ Difficulty: Medium
 	var/stageThree = FALSE
 	var/currentPower = 0 //Every few seconds this variable gets higher, when it gets high
 						 //enough it will use a special attack then reset the variable to 0w
-	songs = list("2670" = sound(file = 'modular_sand/sound/ambience/furidanger802.ogg', repeat = 0, wait = 0, volume = 100, channel = CHANNEL_BOSSMUSIC))
 	glorymessageshand = list("climbs atop the wolf's head as it dangles weakly near the ground, ripping its left eye off and jumping down before punching through it's cranium!", "goes around the wolf and rips off their tail, using it as whip on the fiend")
 	glorymessagescrusher = list("chops off the wolf's head by it's neck!")
 	glorymessagespka = list("shoots at the wolf's eyes with their PKA, exploding them into giblets!")
@@ -215,11 +214,13 @@ Difficulty: Medium
 		switch(rand(0,100))
 			if(0 to 1)
 				passed = 1
+			else
 
 	if(enraged)
 		switch(rand(0,100))
 			if(0 to 5)
 				passed = 1
+			else
 
 	if(passed == 1)
 		visible_message("<span class='danger'>[src] dodged the projectile!</span>", "<span class='userdanger'>You dodge the projectile!</span>")

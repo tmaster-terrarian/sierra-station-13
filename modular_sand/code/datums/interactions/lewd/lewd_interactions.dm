@@ -402,7 +402,7 @@
 							to_chat(user, "<span class='warning'>Their feet need to be unexposed.</span>")
 						return FALSE
 
-		if(require_target_num_feet && (user.get_num_feet() < require_target_num_feet))
+		if(require_target_num_feet && (target.get_num_feet() < require_target_num_feet))
 			if(!silent)
 				to_chat(user, "<span class='warning'>They don't have enough feet.</span>")
 			return FALSE
@@ -533,7 +533,7 @@
 		var/client/ucli = LM.client
 		if(cli.prefs.extremepref != "No")
 			if(!ucli || (ucli.prefs.extremepref != "No"))
-				if(!get_item_by_slot(ITEM_SLOT_EARS))
+				if(!get_item_by_slot(ITEM_SLOT_EARS_LEFT) && !get_item_by_slot(ITEM_SLOT_EARS_RIGHT))
 					if(has_ears())
 						dat += "...have unprotected ears."
 					else

@@ -57,6 +57,7 @@
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/penis, GLOB.cock_shapes_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/vagina, GLOB.vagina_shapes_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/breasts, GLOB.breasts_shapes_list)
+	init_sprite_accessory_subtypes(/datum/sprite_accessory/butt, GLOB.butt_shapes_list)
 	init_sprite_accessory_subtypes(/datum/sprite_accessory/testicles, GLOB.balls_shapes_list)
 
 	for(var/gpath in subtypesof(/obj/item/organ/genital))
@@ -87,16 +88,6 @@
 
 	// Keybindings
 	init_keybindings()
-
-	//Uplink Items
-	for(var/path in subtypesof(/datum/uplink_item))
-		var/datum/uplink_item/I = path
-		if(!initial(I.item)) //We add categories to a separate list.
-			GLOB.uplink_categories |= initial(I.category)
-			continue
-		GLOB.uplink_items += path
-	//(sub)typesof entries are listed by the order they are loaded in the code, so we'll have to rearrange them here.
-	GLOB.uplink_items = sortList(GLOB.uplink_items, /proc/cmp_uplink_items_dsc)
 
 	init_subtypes(/datum/crafting_recipe, GLOB.crafting_recipes)
 

@@ -60,14 +60,16 @@
 
 	if(user.nutrition < NUTRITION_LEVEL_WELL_FED)
 		user.adjust_nutrition(target.nutrition, NUTRITION_LEVEL_WELL_FED)
-	if(user.thirst < THIRST_LEVEL_QUENCHED)
+	if(get_thirst(user) < THIRST_LEVEL_QUENCHED)
 		user.adjust_thirst(target.thirst, THIRST_LEVEL_QUENCHED)
 
 	// Absorb a lizard, speak Draconic.
 	user.copy_languages(target, LANGUAGE_ABSORB)
 
 	if(target.mind && user.mind)//if the victim and user have minds
-		target.mind.show_memory(user, 0) //I can read your mind, kekeke. Output all their notes.
+//ambition start
+		to_chat(user, "<i>[target.mind.show_memory()]</i>") //I can read your mind, kekeke. Output all their notes.
+//ambition end
 
 		//Some of target's recent speech, so the changeling can attempt to imitate them better.
 		//Recent as opposed to all because rounds tend to have a LOT of text.

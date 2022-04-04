@@ -90,6 +90,8 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/vagina, GLOB.vagina_shapes_list)
 	if(!GLOB.breasts_shapes_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/breasts, GLOB.breasts_shapes_list)
+	if(!GLOB.butt_shapes_list.len)
+		init_sprite_accessory_subtypes(/datum/sprite_accessory/butt, GLOB.butt_shapes_list)
 	if(!GLOB.ipc_screens_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/screen, GLOB.ipc_screens_list)
 	if(!GLOB.ipc_antennas_list.len)
@@ -206,10 +208,16 @@
 		"vag_shape"			= pick(GLOB.vagina_shapes_list),
 		"vag_color"			= pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
 		"has_womb"			= FALSE,
+		"has_butt"			= FALSE,
+		"butt_size"			= BUTT_SIZE_DEF,
+		"butt_color"		= pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
+
+
 		"balls_visibility"	= GEN_VISIBLE_NO_UNDIES,
 		"breasts_visibility"= GEN_VISIBLE_NO_UNDIES,
 		"cock_visibility"	= GEN_VISIBLE_NO_UNDIES,
 		"vag_visibility"	= GEN_VISIBLE_NO_UNDIES,
+		"butt_visibility"	= GEN_VISIBLE_NO_UNDIES,
 		"ipc_screen"		= snowflake_ipc_antenna_list ? pick(snowflake_ipc_antenna_list) : "None",
 		"ipc_antenna"		= "None",
 		"flavor_text"		= "",
@@ -388,8 +396,9 @@ GLOBAL_LIST_EMPTY(species_datums)
 			override = TRUE
 		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE))
 			override = TRUE
-		if(SSticker.current_state == GAME_STATE_FINISHED)
-			override = TRUE
+		if(CONFIG_GET(flag/reveal_everything))
+			if(SSticker.current_state == GAME_STATE_FINISHED)
+				override = TRUE
 		if(isnewplayer(M) && !override)
 			continue
 		if(M.stat != DEAD && !override)
@@ -458,6 +467,21 @@ GLOBAL_LIST_EMPTY(species_datums)
 	if(!HAS_TRAIT(L, TRAIT_PASSTABLE))
 		L.pass_flags &= ~PASSTABLE
 
+/proc/dance_rotate(atom/movable/AM, datum/callback/callperrotate, set_original_dir=FALSE)
+	set waitfor = FALSE
+	var/originaldir = AM.dir
+	for(var/i in list(NORTH,SOUTH,EAST,WEST,EAST,SOUTH,NORTH,SOUTH,EAST,WEST,EAST,SOUTH))
+		if(!AM)
+			return
+		AM.setDir(i)
+		callperrotate?.Invoke()
+		sleep(1)
+	if(set_original_dir)
+		AM.setDir(originaldir)
+
 /// Gets the client of the mob, allowing for mocking of the client.
 /// You only need to use this if you know you're going to be mocking clients somewhere else.
 #define GET_CLIENT(mob) (##mob.client || ##mob.mock_client)
+
+//check if the person is dead, not sure where to put this
+#define IS_DEAD_OR_INCAP(source) (source.incapacitated() || source.stat)

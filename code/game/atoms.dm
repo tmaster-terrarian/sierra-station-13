@@ -494,18 +494,20 @@
 //end changes (yeah the whole proc was modified)
 
 /atom/proc/examine(mob/user)
-	. = list("[get_examine_string(user, TRUE)].")
+	. = list("[get_examine_string(user, TRUE)].[desc ? "<hr>" : null]")
 
 	if(desc)
 		. += desc
 
 	if(custom_materials)
+		. += "<hr>"
 		var/list/materials_list = list()
 		for(var/i in custom_materials)
 			var/datum/material/M = i
 			materials_list += "[M.name]"
 		. += "<u>It is made out of [english_list(materials_list)]</u>."
 	if(reagents)
+		. += "<hr>"
 		if(reagents.reagents_holder_flags & TRANSPARENT)
 			. += "It contains:"
 			if(length(reagents.reagent_list))
@@ -1236,7 +1238,7 @@
 
 	if(user != target)
 		var/reverse_message = "has been [what_done] by [ssource][postfix]"
-		target.log_message(reverse_message, LOG_ATTACK, color="orange", log_globally=FALSE)
+		target.log_message(reverse_message, LOG_VICTIM, color="orange", log_globally=FALSE)
 
 /**
   * log_wound() is for when someone is *attacked* and suffers a wound. Note that this only captures wounds from damage, so smites/forced wounds aren't logged, as well as demotions like cuts scabbing over
@@ -1312,9 +1314,7 @@
 
 /obj/item/update_filters()
 	. = ..()
-	for(var/X in actions)
-		var/datum/action/A = X
-		A.UpdateButtonIcon()
+	update_action_buttons()
 
 /atom/proc/get_filter(name)
 	if(filter_data && filter_data[name])
@@ -1425,3 +1425,16 @@
   */
 /atom/proc/setClosed()
 		return
+
+//Update the screentip to reflect what we're hoverin over
+/atom/MouseEntered(location, control, params)
+	. = ..()
+	// Screentips
+	var/client/client = usr?.client
+	var/datum/hud/active_hud = client?.mob?.hud_used
+	if(active_hud)
+		if(!client.prefs.screentip_pref || (flags_1 & NO_SCREENTIPS_1))
+			active_hud.screentip_text.maptext = ""
+		else
+			//We inline a MAPTEXT() here, because there's no good way to statically add to a string like this
+			active_hud.screentip_text.maptext = MAPTEXT("<span style='text-align: center; font-size: 32px; color: [client?.prefs?.screentip_color]'>[name]</span>")
