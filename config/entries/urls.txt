@@ -3,7 +3,7 @@
 # SERVER ss13.example.com:2506
 
 ## forum address
-# DISCORDURL https://discord.gg/ZPSeb4jr3E
+# DISCORDURL https://discord.gg
 
 ## Wiki address
 # WIKIURL https://citadel-station.net/wikimain/index.php
