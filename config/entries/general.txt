@@ -172,16 +172,16 @@ MINIMAL_ACCESS_THRESHOLD 20
 #JOBS_HAVE_MINIMAL_ACCESS
 
 ## Uncomment to give assistants maint access.
-#ASSISTANTS_HAVE_MAINT_ACCESS
+ASSISTANTS_HAVE_MAINT_ACCESS
 
 ## Uncoment to give security maint access. Note that if you dectivate JOBS_HAVE_MINIMAL_ACCESS security already gets maint from that.
-#SECURITY_HAS_MAINT_ACCESS
+SECURITY_HAS_MAINT_ACCESS
 
 ## Uncomment to give everyone maint access.
-#EVERYONE_HAS_MAINT_ACCESS
+EVERYONE_HAS_MAINT_ACCESS
 
 ## Comment this out this to make security officers spawn in departmental security posts
-SEC_START_BRIG
+#SEC_START_BRIG
 
 
 ## GHOST INTERACTION ###
@@ -275,7 +275,7 @@ LAW_WEIGHT buildawall,0
 ## SILICON LAW MAX AMOUNT ###
 ## The maximum number of laws a silicon can have
 ## Attempting to upload laws past this point will fail unless the AI is reset
-SILICON_MAX_LAW_AMOUNT 12
+SILICON_MAX_LAW_AMOUNT 100
 
 ## Roundstart Races
 ##-------------------------------------------------------------------------------------------
@@ -433,7 +433,7 @@ ROUNDSTART_TRAITS
 #DISABLE_HUMAN_MOOD
 
 ## Enable night shifts ##
-#ENABLE_NIGHT_SHIFTS
+ENABLE_NIGHT_SHIFTS
 
 ## Makes night shifts only affect in-code public-flagged areas. Nightshifts hit the level as defined in __DEFINES/misc.dm that this is set to and anything below. ##
 NIGHT_SHIFT_PUBLIC_AREAS_ONLY 1
@@ -502,7 +502,7 @@ PAI_CUSTOM_HOLOFORMS
 #HARD_DELETES_OVERRUN_LIMIT 0
 
 ## Enables monstermos/"equalization" step in atmos.
-# ATMOS_EQUALIZATION_ENABLED
+ATMOS_EQUALIZATION_ENABLED
 
 ## Do station renames from the station charter require admin approval to pass, as opposed to autoapproving if not denied.
 STATION_NAME_NEEDS_APPROVAL

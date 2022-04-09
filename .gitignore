@@ -199,3 +199,7 @@ Temporary Items
 
 #Ignore server config
 /config/**/*
+
+config/entries/fetish_content.txt
+config/entries/general.txt
+config/entries/server.txt
